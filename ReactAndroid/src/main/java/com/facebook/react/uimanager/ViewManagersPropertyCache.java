@@ -101,9 +101,13 @@ import javax.annotation.Nullable;
         ReactStylesDiffMap props) {
       try {
         if (mIndex == null) {
-          SHADOW_ARGS[0] = extractProperty(props);
-          mSetter.invoke(nodeToUpdate, SHADOW_ARGS);
-          Arrays.fill(SHADOW_ARGS, null);
+          // SHADOW_ARGS[0] = extractProperty(props);
+          // mSetter.invoke(nodeToUpdate, SHADOW_ARGS);
+          // Arrays.fill(SHADOW_ARGS, null);
+          Object[] local_SHADOW_ARGS = new Object[SHADOW_ARGS.length];
+          local_SHADOW_ARGS[0] = extractProperty(props);
+          mSetter.invoke(nodeToUpdate, local_SHADOW_ARGS);
+          Arrays.fill(local_SHADOW_ARGS, null);
         } else {
           SHADOW_GROUP_ARGS[0] = mIndex;
           SHADOW_GROUP_ARGS[1] = extractProperty(props);
