@@ -17,6 +17,7 @@ import android.graphics.PorterDuff;
 import android.graphics.SurfaceTexture;
 import android.view.TextureView;
 import android.os.Build;
+import android.util.Log;
 
 import com.facebook.common.logging.FLog;
 import com.facebook.react.common.ReactConstants;
@@ -114,16 +115,20 @@ public class ARTSurfaceViewShadowNode extends LayoutShadowNode
   @Override
   public void setThemedContext(ThemedReactContext themedContext) {
     super.setThemedContext(themedContext);
-    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-      themedContext.addLifecycleEventListener(this);
+    themedContext.addLifecycleEventListener(this);
+    Log.d("ReactNativeJS", "-----> enable life cycle event listener");
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      Log.d("ReactNativeJS", "-----> LOG enable life cycle event listener");
     }
   }
 
   @Override
   public void dispose() {
     super.dispose();
-    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
-      getThemedContext().removeLifecycleEventListener(this);
+    getThemedContext().removeLifecycleEventListener(this);
+    Log.d("ReactNativeJS", "-----> remove life cycle event listener");
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      Log.d("ReactNativeJS", "-----> LOG remove life cycle event listener");
     }
   }
 
